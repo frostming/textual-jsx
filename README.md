@@ -7,8 +7,9 @@ Write your Textual UI with familiar JSX-like syntax instead of nested Python cal
 ## Installation
 
 ```bash
-git clone https://github.com/frostming/textual-jsx.git
-pip install .
+uv pip install git+https://github.com/frostming/textual-jsx.git
+# Or
+pip install git+https://github.com/frostming/textual-jsx.git
 ```
 
 **Requirements:** Python 3.12+

@@ -1,0 +1,71 @@
+from textual.app import App, ComposeResult
+from textual.containers import Center, Vertical
+from textual.reactive import reactive
+from textual.widgets import Button, Footer, Header, Static
+
+from textual_jsx import jsx
+
+class Counter(Static):
+    """A counter widget that displays a count value."""
+
+    count: reactive[int] = reactive(0)
+
+    def render(self) -> str:
+        return f"Count: {self.count}"
+
+    def increment(self) -> None:
+        self.count += 1
+
+
+class CounterApp(App):
+    """A simple counter application with a title, counter, and button."""
+
+    CSS = """
+    Screen {
+        align: center middle;
+    }
+
+    Vertical {
+        width: auto;
+        height: auto;
+    }
+
+    #title {
+        text-align: center;
+        text-style: bold;
+        color: cyan;
+        padding: 1 2;
+    }
+
+    #counter {
+        text-align: center;
+        padding: 1 2;
+        min-width: 20;
+    }
+
+    #increment-btn {
+        margin-top: 1;
+    }
+    """
+
+    BINDINGS = [
+        ("q", "quit", "Quit the app"),
+    ]
+
+    def compose(self) -> ComposeResult:
+        return (
+            <>
+                <Header />
+                <Vertical>
+                    <Center><Static id="title">"Welcome to Textual 💚 JSX"</Static></Center>
+                    <Center><Counter id="counter" /></Center>
+                    <Center><Button id="increment-btn" variant="success">+1</Button></Center>
+                </Vertical>
+                <Footer />
+            </>
+        )
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "increment-btn":
+            counter = self.query_one("#counter", Counter)
+            counter.increment()

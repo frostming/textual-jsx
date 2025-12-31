@@ -22,6 +22,12 @@ pip install git+https://github.com/frostming/textual-jsx.git
 
 See the [example counter app](./counter.px) and [main.py](./main.py).
 
+Run the example app:
+
+```bash
+cd examples && uv run main.py
+```
+
 Refer to the [pyjsx](https://github.com/tomasr8/pyjsx) project for more details about the JSX syntax and how to add support for VSCode and
 
 ## Credits
